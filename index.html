@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>BTC Supertrend Signals</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0b0f1c;
+            color: #e0e0e0;
+            padding: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .card {
+            background: #1e2538;
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .price-change {
+            font-size: 1rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            background: #2a3349;
+        }
+        .signal-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f1422;
+            border-radius: 40px;
+            padding: 16px 24px;
+            margin: 20px 0 10px;
+        }
+        .signal-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8d9bb5;
+        }
+        .signal-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+        .buy { color: #0ecb81; }
+        .sell { color: #f6465d; }
+        .neutral { color: #f0b90b; }
+        .indicator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .indicator-item {
+            background: #2a3349;
+            border-radius: 20px;
+            padding: 16px;
+        }
+        .indicator-title {
+            font-size: 0.9rem;
+            color: #8d9bb5;
+            margin-bottom: 8px;
+        }
+        .indicator-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .update-time {
+            text-align: center;
+            color: #5d6b89;
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            color: #3a4568;
+            margin-top: 20px;
+            font-size: 0.8rem;
+        }
+        button {
+            background: #2b89ff;
+            border: none;
+            color: white;
+            padding: 16px;
+            width: 100%;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        button:active { opacity: 0.8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="price">
+                <span id="price">---</span>
+                <span class="price-change" id="change">0.00%</span>
+            </div>
+            <div class="signal-box">
+                <span class="signal-label">Signal</span>
+                <span class="signal-value" id="signal">WAIT</span>
+            </div>
+            <div class="indicator-grid">
+                <div class="indicator-item">
+                    <div class="indicator-title">Supertrend</div>
+                    <div class="indicator-number" id="supertrend">---</div>
+                </div>
+                <div class="indicator-item">
+                    <div class="indicator-title">RSI (14)</div>
+                    <div class="indicator-number" id="rsi">---</div>
+                </div>
+            </div>
+            <div class="update-time" id="timestamp">Updating...</div>
+        </div>
+        <button id="refreshBtn">↻ Refresh Now</button>
+        <div class="footer">
+            Data from Binance public API · Auto-updates every 60s
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
